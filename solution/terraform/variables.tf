@@ -15,17 +15,17 @@ variable "az_count" {
 
 variable "app_image" {
   description = "Docker image to run in the ECS cluster"
-  default     = "nginx:latest"
+  default     = "harkirat22/servian-techchallenge"
 }
 
 variable "app_port" {
   description = "Port exposed by the docker image to redirect traffic to"
-  default     = 80
+  default     = 3000
 }
 
 variable "database_port" {
   description = "Port exposed by the db instacne to allow ECS traffic"
-  default     = 3000
+  default     = 5432
 }
 
 variable "app_count" {
@@ -35,6 +35,10 @@ variable "app_count" {
 
 variable "health_check_path" {
   default = "/"
+}
+
+variable "db_user" {
+  default = "hakky"
 }
 
 variable "fargate_cpu" {
