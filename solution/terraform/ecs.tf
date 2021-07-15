@@ -2,6 +2,9 @@ resource "aws_ecs_cluster" "main" {
   name = "myapp-cluster"
 }
 
+data "aws_ssm_parameter" "dbpassword" {
+  name = "/database/password"
+}
 data "template_file" "myapp" {
   template = file("../template/myapp.json.tpl")
 
@@ -10,7 +13,10 @@ data "template_file" "myapp" {
     app_port       = var.app_port
     fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
-    aws_region     = var.aws_region
+    aws_region     = var.aws_region,
+    db_password    = data.aws_ssm_parameter.dbpassword.value,
+    db_user        = var.db_user,
+    db_host        = aws_db_instance.postgresdb.address
   }
 }
 
