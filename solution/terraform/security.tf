@@ -48,7 +48,7 @@ resource "aws_security_group" "postgre-sql" {
     protocol        = "tcp"
     from_port       = var.database_port
     to_port         = var.database_port
-    security_groups = [aws_security_group.lb.id]
+    security_groups = [aws_security_group.ecs_tasks.id]
   }
 
   egress {
